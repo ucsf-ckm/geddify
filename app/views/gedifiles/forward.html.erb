@@ -1,0 +1,38 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Forward GEDI file</span>
+<p/>
+
+<%= render "messages" %>
+
+<%= form_for(@gedifile, :url => url_for(:controller => 'gedifiles', :action => 'send_forward'),
+:html => {:multipart => true}) do |f| %>
+	<p/>
+	<b>Send to IP or Email address below</b>
+	<p/>
+	<%= f.hidden_field :lock_version %>	
+	<%= hidden_field_tag 'prev_url', request.referer %>
+	<%= hidden_field_tag 'id', @gedifile.id%>
+	
+	<table>
+	  <tr>
+	  <td>Send To:</td><td><%= text_field_tag 'address', '', :size => 40%></td>
+	  </tr>
+	
+	  <td>Destination Type:</td><td><%= select_tag "target_type", 
+		"<option value='patron'>Patron (email)</option>
+		<option value='geddify'>geddify</option>
+		<option value='ariel3ftp'>Ariel3 (ftp)</option>
+		<option value='ariel3email'>Ariel3 (email)</option>
+		<option value='ariel4ftp'>Ariel4 (ftp)</option>
+		<option value='ariel4email'>Ariel4 (email)</option>".html_safe%></td>
+	  </tr>
+	
+	</table>
+	<p>
+	  <%= f.submit "Forward"%>
+	<% end %>
+	<p/>
+</div>
+</div>

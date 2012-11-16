@@ -1,0 +1,23 @@
+defaults: &DEFAULTS
+    IFID: "GEDI-1"
+    IFVR: "0"
+    CILN: "2048"
+    DFID: "TIFF-5.0"
+    SSAD: "?=()"
+    CNSN: "N=Ariel/Windows;F=(A=123.45.678.90)"
+    RCNM: "ildx556195"
+    SPLN: N=Ariel/Windows;F=(A=123.45.678.90;D=C:\PROGRA~1\RLG\Ariel\OUT)
+    #SVDT: set dynamically in code as Time.now.strftime(%Y%m%d%H%M%S)
+    CLNT: "Client Name"
+    RSNM: "N=UCSF Ariel Deliver"
+    RSNT: "Delivery from UCSF"
+    NMPG: "17"
+       
+development:
+    <<: *DEFAULTS
+    
+test:
+    <<: *DEFAULTS
+
+production:
+    <<: *DEFAULTS

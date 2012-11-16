@@ -1,0 +1,32 @@
+<div id=main>
+
+<table style="border-collapse: collapse" border="1" cellpadding="6">
+
+  <tr bgcolor="#ddd">
+    <th colspan="9">GEDI files</th>
+  </tr>
+
+  <tr>
+	<th>Filename</th>
+	<th>Status</th>
+	<th colspan="7">Action</th>
+  </tr>
+
+<%= render "messages" %>
+
+<% @gedifilenames.each do |gedifilename| %>
+  <tr>
+	<td><%= gedifilename.filename %></td>
+	<td><%= gedifilename.status %></td>
+	<td><a href='/gedifiles/<%=gedifilename.gedifile.id%>/forward'>forward</a></td>
+    <td><a href='/gedifiles/<%=gedifilename.gedifile.id%>/edit'>edit</a></td>
+    <td><a href='/editlongform/<%=gedifilename.gedifile.id%>'>edit longform</a></td>
+    <td><a href='/file_download/<%=gedifilename.auth_token%>'>view file</a></td>
+    <td><a href='/gedi_download/<%=gedifilename.auth_token%>'>view gedi</a></td>
+	<td><a href='/gedifiles/<%=gedifilename.id%>/history'>history</a></td>
+	<td><%= link_to 'delete', gedifilename.gedifile, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>

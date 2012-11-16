@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  gedifile_id: 1
+  filename: 12345678.90A
+  auth_token: 1234
+
+two:
+  id: 2
+  gedifile_id: 2
+  filename: 12345678.90A
+  auth_token: 3456
+  
+three:
+    id: 3
+    gedifile_id: 3
+    filename: 12345678.90A
+    auth_token: 78910

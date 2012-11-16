@@ -1,0 +1,17 @@
+defaults: &DEFAULTS
+    file_server_address: 
+    ftp_ipaddress: 
+    ftp_port: 419
+    ftp_username: admin
+    ftp_password: 
+    gedifiles_directory: gedifiles
+    email_address:
+    
+development:
+    <<: *DEFAULTS
+
+test:
+    <<: *DEFAULTS
+
+production:
+    <<: *DEFAULTS

@@ -1,0 +1,50 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Edit GEDI headers</span>
+<p/>
+
+<% [:info, :error].each do |key| %>
+  <% if flash[key] %>
+  <div id="error_explanation">
+    Unable to process GEDI file: <%= flash[key] %>
+  </div>
+  <% end %>
+<% end %>
+
+<%= form_for(@gedifile, :html => {:multipart => true}) do |f| %>
+	<% if @gedifile.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@gedifile.errors.count, "error") %> prohibited this gedifile from being sent:</h2>
+
+	    <ul>
+	    <% @gedifile.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+
+	<%= hidden_field_tag 'prev_url', request.referer %>
+	<%= f.hidden_field :lock_version %>	
+ 
+	<p/>
+	<b>Mandatory Headers</b>
+	<p/>
+
+	<table>
+	<% @attributes.each do |name, val| %>	
+	  <tr>
+	  <td><%=name%></td><td><%= eval("f.text_field :#{name}, :size=>80")%></td>
+	  </tr>
+	<%end%>
+
+	</table>
+	<p>
+	
+	<%= f.submit %>
+
+<% end %>
+	<p/>
+</div>
+</div>

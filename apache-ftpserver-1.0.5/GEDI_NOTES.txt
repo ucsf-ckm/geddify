@@ -1,0 +1,159 @@
+This is the version of the mina server with modifications to run as an ariel ftp server.  This configuration allows incoming traffic with ariel standard user names and passwords.  
+
+To start the app
+
+./bin/ftpd.sh res/conf/ftpd-typical.xml 
+
+to test, from command line call
+
+ftp <youripaddress> 419 
+use password "document"
+convert your ip address to hex, and replace the 0 with #
+you can use the java program below to do this...
+
+Notes on modifications to code.
+
+(if you're just interesting in running the app, no need to get into this, but here's a summary of what I had to do to get the mina ftp server to follow the ariel ftp authentication protocol).
+
+Ariel requires the ability to ftp to a server under two different usernames depending on the ariel version.
+For ariel3, the username is "document"
+For ariel4, the username is "ariel4"
+The password is a hex hash of the incoming IP address, with 0 replaced by #.
+
+here's a ruby snippet that will do this for you (the actual geddify app is written in ruby)
+
+address = "123.45.678.90"
+puts ("%02X%02X%02X%02X" % address.split('.')).gsub("0","#")
+
+so in this case, the username would be "document" and the password would be 7B2D2A65A
+
+
+since mina is a java app, here's a short Java program that will generate the password for an IP address (more or less the same as the ruby code above)
+
+public class arielPwd {
+
+public static void main(String[] args) {
+
+		String hostaddress = args[0];
+
+		System.out.println("host address: " + hostaddress);
+	
+		System.out.println("hex password information");
+		String hexpassword = hostaddress;
+	
+		System.out.println("hexpassword " + hexpassword);
+	
+		String[] hexpasswords = hexpassword.split("\\.");
+	
+		System.out.println("length " + hexpasswords.length);
+	
+		String password = "";
+	
+		String tmp = "";
+	
+		for (int i=0; i<hexpasswords.length; i++) {		
+			tmp = Integer.toHexString(Integer.parseInt(hexpasswords[i])).toUpperCase();
+			if (tmp.length() == 1) {
+				tmp = "0" + tmp;
+			}	
+			password += tmp;
+		}
+
+		System.out.println("hex password is: " + password.replace("0", "#"));
+	}
+
+}
+
+
+Notes on configuring the mina ftp server.
+
+You don't have to do this unless you're interested in making the changes and rebuilding from scratch.  
+
+to make this work in the apache mina ftp server (version 1.0.5) I had to override a couple of methods used for authentication.
+
+take a look at the code, you can see all I'm doing is checking to see if the user is "document" or "ariel4" and then verifying that the password is a proper hex hash (above) of the incoming IP address.  Just want to say here that I don't endorse this authentication method, it's just how Ariel works.  
+
+
+/**
+* User authenticate method
+*/
+public User authenticate(Authentication authentication)
+    	throws AuthenticationFailedException {
+	if (authentication instanceof UsernamePasswordAuthentication) {
+    	UsernamePasswordAuthentication upauth = (UsernamePasswordAuthentication) authentication;
+
+    	String user = upauth.getUsername();
+    	String password = upauth.getPassword();
+	 String hexpassword = upauth.getUserMetadata().getInetAddress().getHostAddress();
+
+    	if (user == null) {
+        	throw new AuthenticationFailedException("Authentication failed");
+    	}
+
+    	if (password == null) {
+        	password = "";
+    	}
+
+	 if (user.equals("document")) {
+	 
+		 try {
+			 String[] hexpasswords = hexpassword.split("\\.");
+			 
+			 hexpassword = "";
+
+			 for (int i=0; i<hexpasswords.length; i++) {
+				 hexpassword += Integer.toHexString(Integer.parseInt(hexpasswords[i])).toUpperCase();    
+			 }
+
+			 hexpassword = hexpassword.replace("0", "#");
+			 
+			 System.out.println("hex password is " + hexpassword);
+			 
+		 } catch (Exception ex) { }
+				 
+	 }
+
+    	String storedPassword = userDataProp.getProperty(PREFIX + user
+            	+ '.' + ATTR_PASSWORD);
+
+    	if (storedPassword == null) {
+        	// user does not exist
+        	throw new AuthenticationFailedException("Authentication failed");
+    	}
+
+    	if (hexpassword.equals(password) || getPasswordEncryptor().matches(password, storedPassword)) {
+        	return getUserByName(user);
+    	} else {
+        	throw new AuthenticationFailedException("Authentication failed");
+    	}
+
+	} else if (authentication instanceof AnonymousAuthentication) {
+    	if (doesExist("anonymous")) {
+        	return getUserByName("anonymous");
+    	} else {
+        	throw new AuthenticationFailedException("Authentication failed");
+    	}
+	} else {
+    	throw new IllegalArgumentException(
+            	"Authentication not supported by this user manager");
+	}
+}
+
+
+The build process was slightly complicated, not sure why.  Here's what I had to do:
+
+Get the 1.0.5 (it may work with other versions, haven't tried it) version of the apache mina server
+Change the authenticate method as shown above
+run mvn install
+switch to the distribution directory and run mvn package
+then you need to unzip or untar apache-ftpserver.version...
+then copy that to the distribution/common/lib directory
+run it from 1.0.5/target/apache-ftpserver-1.0.5
+./bin/ftpd.sh res/conf/ftpd-typical.xml
+
+
+Technically it should be possible to extend this class rather than changing the code in place, but I wasn't able to do that.  So I just modified the method directly and rebuilt the app. 
+
+
+
+

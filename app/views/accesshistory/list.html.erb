@@ -1,0 +1,22 @@
+<div id=main>
+
+<table style="border-collapse: collapse" border="1" cellpadding="6">
+
+  <tr bgcolor="#ddd">
+    <th colspan="2">Access Log for <%=@gedifilename.id%></th>
+  </tr>
+
+  <tr>
+	<th>Date</th>
+	<th>Action</th>
+  </tr>
+
+<% @accesshistories.each do |accesshistory| %>
+  <tr>
+	<td><%= accesshistory.created_at %></td>
+	<td><%= accesshistory.action %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>

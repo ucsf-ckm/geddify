@@ -1,0 +1,178 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  lock_version: 0
+  IFID: GEDI-1
+  IFVR: 0
+  CILN: 2048
+  DFID: TIFF-5.0
+  SSAD: ?=()
+  CNSN: N=Ariel/Windows;F=(A=<%=UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last} %>)
+  RCNM: ildx556195
+  SPLN: N=Ariel/Windows;F=(A=<%=UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last} %>;D=C:PROGRA~1RLGArielOUT)
+  SVDT: 20120301133810
+  SYID: 
+  SYAD: 
+  DLVS: 
+  CNFA: 
+  PRTY: 
+  GNLN: 
+  CLNT: 
+  CLID: 
+  CLST: 
+  NPOI: 
+  XPDA: 
+  STNM: 
+  POBX: 
+  CITY: 
+  REGN: 
+  CNTR: 
+  POCD: 
+  RQID: 
+  RQNM: 
+  RSID: 
+  RSNM: 
+  CPRT: 
+  ILTI: 
+  RSNT: 
+  RCON: 
+  ATHR: 
+  TTLE: 
+  VLIS: 
+  AART: 
+  TART: 
+  ISBN: 
+  ISSN: 
+  BBLD: 
+  PGNS: 
+  DTSC: 
+  NMPG: 
+  CLNO: 
+  PDOC: 
+  PUBD: 
+  PLPB: 
+  PUBL: 
+  EDIT: 
+  RQAQ: 
+  STAT: 
+  ITID: 
+  ZPAD: 
+
+two:
+  id: 2
+  lock_version: 0
+  IFID: GEDI-1
+  IFVR: 0
+  CILN: 2048
+  DFID: TIFF-5.0
+  SSAD: ?=()
+  CNSN: N=Ariel/Windows;F=(E=geoffrey.boushey@ucsf.edu)
+  RCNM: ildx556195
+  SPLN: N=Ariel/Windows;F=(A=<%=UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last} %>;D=C:PROGRA~1RLGArielOUT)
+  SVDT: 20120301133810
+  SYID: 
+  SYAD: 
+  DLVS: 
+  CNFA: 
+  PRTY: 
+  GNLN: 
+  CLNT: 
+  CLID: 
+  CLST: 
+  NPOI: 
+  XPDA: 
+  STNM: 
+  POBX: 
+  CITY: 
+  REGN: 
+  CNTR: 
+  POCD: 
+  RQID: 
+  RQNM: 
+  RSID: 
+  RSNM: 
+  CPRT: 
+  ILTI: 
+  RSNT: 
+  RCON: 
+  ATHR: 
+  TTLE: 
+  VLIS: 
+  AART: 
+  TART: 
+  ISBN: 
+  ISSN: 
+  BBLD: 
+  PGNS: 
+  DTSC: 
+  NMPG: 
+  CLNO: 
+  PDOC: 
+  PUBD: 
+  PLPB: 
+  PUBL: 
+  EDIT: 
+  RQAQ: 
+  STAT: 
+  ITID: 
+  ZPAD: 
+
+three:
+    id: 3
+    lock_version: 0
+    IFID: GEDI-1
+    IFVR: 0
+    CILN: 2048
+    DFID: TIFF-5.0
+    SSAD: ?=()
+    CNSN: N=Ariel/Windows;F=(A=128.001.15.001) # bad ip address
+    RCNM: ildx556195
+    SPLN: N=Ariel/Windows;F=(A=127.1.1.1;D=C:PROGRA~1RLGArielOUT) # bad ip address
+    SVDT: 20120301133810
+    SYID: 
+    SYAD: 
+    DLVS: 
+    CNFA: 
+    PRTY: 
+    GNLN: 
+    CLNT: 
+    CLID: 
+    CLST: 
+    NPOI: 
+    XPDA: 
+    STNM: 
+    POBX: 
+    CITY: 
+    REGN: 
+    CNTR: 
+    POCD: 
+    RQID: 
+    RQNM: 
+    RSID: 
+    RSNM: 
+    CPRT: 
+    ILTI: 
+    RSNT: 
+    RCON: 
+    ATHR: 
+    TTLE: 
+    VLIS: 
+    AART: 
+    TART: 
+    ISBN: 
+    ISSN: 
+    BBLD: 
+    PGNS: 
+    DTSC: 
+    NMPG: 
+    CLNO: 
+    PDOC: 
+    PUBD: 
+    PLPB: 
+    PUBL: 
+    EDIT: 
+    RQAQ: 
+    STAT: 
+    ITID: 
+    ZPAD: 

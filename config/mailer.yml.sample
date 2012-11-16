@@ -1,0 +1,9 @@
+development:
+    file_server_name: localhost:3000
+        
+test:
+    file_server_name: localhost:3000
+
+production:
+    file_server_name: localhost:3000
+

@@ -1,0 +1,74 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Create GEDI file (Mandatory Fields Only)</span>
+<p/>
+
+<%= render "messages" %>
+
+<%= form_for(@gedifile, :html => {:multipart => true}) do |f| %>
+	<% if @gedifile.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@gedifile.errors.count, "error") %> prohibited this gedifile from being sent:</h2>
+	    <ul>
+	    <% @gedifile.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	<%= hidden_field_tag 'prev_url', request.referer %>
+
+	<p/>
+	<b>Mandatory GEDI Headers</b>
+	<p/>
+
+	<table>
+	  <tr>
+	  <td>IFID</td><td><%= f.text_field :IFID, :size=>20%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>IFVR</td><td><%= f.text_field :IFVR, :size=>20%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>CILN</td><td><%= f.text_field :CILN, :size=>10%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>DFID</td><td><%= f.text_field :DFID, :size=>20%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>SSAD</td><td><%= f.text_field :SSAD, :size=>50%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>CNSN</td><td><%= f.text_field :CNSN, :size=>100%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>RCNM</td><td><%= f.text_field :RCNM, :size=>32%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>SPLN</td><td><%= f.text_field :SPLN, :size=>100%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>SVDT</td><td><%= f.text_field :SVDT, :size=>14%></td>
+	  </tr>
+
+	  <tr>
+	  <td>File</td><td><%= file_field 'upload', 'gedifile' %></td>
+	  </tr>
+	</table>
+	<p>
+	
+	  <%= f.submit %>
+
+	<% end %>
+	<p/>
+</div>
+</div>

@@ -1,0 +1,55 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Send GEDI file</span>
+<p/>
+
+<%= render "messages" %>
+
+<%= form_for(@gedifile, :url => url_for(:controller => 'gedifiles', :action => 'create'),
+:html => {:multipart => true}) do |f| %>
+	<% if @gedifile.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@gedifile.errors.count, "error") %> prohibited this gedifile from being sent:</h2>
+
+	    <ul>
+	    <% @gedifile.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	<%= hidden_field_tag 'prev_url', request.referer %>
+
+	<p/>
+	<b>Send to IP or Email address below</b>
+	<p/>
+
+	<table>
+	  <tr>
+	  <td>Send To Address:</td><td><%= text_field_tag 'address'%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>Destination Type:</td><td><%= select_tag "target_type", 
+		"<option value='patron'>Patron (email)</option>
+		<option value='geddify'>geddify</option>
+		<option value='ariel3ftp'>Ariel3 (ftp)</option>
+		<option value='ariel3email'>Ariel3 (email)</option>
+		<option value='ariel4ftp'>Ariel4 (ftp)</option>
+		<option value='ariel4email'>Ariel4 (email)</option>
+		<option value='none'>None</option>".html_safe%></td>
+	  </tr>
+
+	  <tr>
+	  <td>File</td><td><%= file_field 'upload', 'gedifile' %></td>
+	  </tr>
+	</table>
+	<p>
+	
+	  <%= f.submit %>
+
+	<% end %>
+	<p/>
+</div>
+</div>

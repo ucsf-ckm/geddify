@@ -1,0 +1,62 @@
+
+
+<!DOCTYPE html>
+
+	<head>
+	    <title>Geddify</title>
+        <%= stylesheet_link_tag    "application" %>
+        <%= javascript_include_tag "application" %>
+        <%= csrf_meta_tags %>
+	<head />
+
+	</head>
+	<body id="page">
+
+		<div id="header">
+
+			<br>
+			&nbsp;&nbsp;&nbsp;<img src="/icon.jpg" height="45" width="50" alt="icon" />&nbsp;&nbsp;&nbsp;<span class="title">GEDI</span>
+
+			<div class="header_user_preferences_menu">
+			</div>
+			<div class="header_log_out_button">
+				<span class="button_secondary">
+		            Logged in as test
+                </span>
+			</div>
+		</div>
+        <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, :id => "flash_#{name}"%>
+        <% end %>
+
+<div id="nav">
+  <div class="nav_container">
+    <p class="nav_title">Tools</p>
+	<ul>
+	  <li class="nav_header">List</li>
+      <li class="nav_item"><%= link_to 'All', '/gedifiles' %></li>
+      <li class="nav_item"><%= link_to 'Pending', '/gedifiles/pending/list' %></li>
+      <li class="nav_item"><%= link_to 'Failed', '/gedifiles/failed/list' %></li>
+      <li class="nav_item"><%= link_to 'Sent', '/gedifiles/sent/list' %></li>
+	</ul>
+	<hr/>
+	<ul>
+	  <li class="nav_header">Create/Send</li>
+      <li class="nav_item"><%= link_to 'Short', '/short' %></li>
+      <li class="nav_item"><%= link_to 'New (mandatory)', '/gedifiles/new' %></li>
+      <li class="nav_item"><%= link_to 'New (all)', '/longform' %></li>
+      <li class="nav_item"><%= link_to 'New (Ariel 3)', '/ariel3' %></li>
+      <li class="nav_item"><%= link_to 'New (Ariel 4)', '/ariel4' %></li>
+	</ul>
+	<hr/>
+	<ul>
+	  <li class="nav_header">Import</li>
+      <li class="nav_item"><%= link_to 'Import GEDI file', '/import' %></li>
+      <li class="nav_item"><%= link_to 'FTP Sync', '/ftp_sync', :confirm => 'Sync with FTP directory?' %></li>
+    </ul>
+  </div>
+</div>
+        <%= yield %>
+
+        </body>
+        </html>

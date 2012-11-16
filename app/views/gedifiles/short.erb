@@ -1,0 +1,41 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Send to Ariel or Email</span>
+<p/>
+
+<%= form_for(@gedifile, :url => url_for(:controller => 'gedifiles', :action => 'create'),
+:html => {:multipart => true}) do |f| %>
+	<% if @gedifile.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@gedifile.errors.count, "error") %> prohibited this gedifile from being sent:</h2>
+
+	    <ul>
+	    <% @gedifile.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+
+	<p/>
+	<b>Send to IP or Email address below</b>
+	<p/>
+
+	<table>
+	  <tr>
+	  <td>Send To:</td><td><%= text_field_tag 'address'%></td>
+	  </tr>
+
+	  <tr>
+	  <td>File</td><td><%= file_field 'upload', 'gedifile' %></td>
+	  </tr>
+	</table>
+	<p>
+	
+	  <%= f.submit %>
+
+	<% end %>
+	<p/>
+</div>
+</div>

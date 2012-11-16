@@ -1,0 +1,15 @@
+class GediMailer < ActionMailer::Base
+  default :from => "emailaddress@university.edu"
+  
+  def delivery_confirmation(gedifile)
+    @gedifile = gedifile
+    mail(:to => gedifile.get_client_email_address, :subject => "Delivered")
+  end
+  
+  def send_to_server(gedifile)
+    attachments['DOCINFO.GDI'] = File.read("#{APP_CONFIG['gedifiles_directory']}/DOCINFO.GDI")
+    attachments['DOCINFO.TXT'] = File.read("#{APP_CONFIG['gedifiles_directory']}/DOCINFO.txt")
+    attachments['DOCUMENT.TIF'] = File.read("#{APP_CONFIG['gedifiles_directory']}/DOCUMENT.TIF")
+    mail(:to => gedifile.get_client_email_address, :subject => "GEDI")
+  end
+end

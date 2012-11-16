@@ -1,0 +1,21 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Import GEDI File</span>
+<p/>
+
+<%= render "messages" %>
+
+<%=  form_tag('/import_gedi_file', :method=>'post', :multipart => true) %>
+
+<b>File:</b>
+<br/>
+<%= file_field_tag 'gedifile' %>
+<p/>
+
+<p/>
+<%= submit_tag "Send" %>
+<p/>
+
+</div>
+</div>

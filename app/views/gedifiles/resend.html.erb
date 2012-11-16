@@ -1,0 +1,80 @@
+<div id=main>
+<div class="main_container">
+
+<span class="h1">Send GEDI file</span>
+<p/>
+
+<%= render "messages" %>
+
+<%= form_for(@gedifile, :method => :put, :html => {:multipart => true}, :url => { :action => "update"}) do |f| %>
+	<% if @gedifile.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@gedifile.errors.count, "error") %> prohibited this gedifile from being sent:</h2>
+
+	    <ul>
+	    <% @gedifile.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+	<%= hidden_field_tag 'prev_url', request.referer %>
+	<%= f.hidden_field :lock_version %>	
+
+	<p/>
+	<b>Mandatory Headers</b>
+	<p/>
+
+	<table>
+	  <tr>
+	  <td>IFID</td><td><%= f.text_field :IFID%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>IFVR</td><td><%= f.text_field :IFVR%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>CILN</td><td><%= f.text_field :CILN%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>DFID</td><td><%= f.text_field :DFID%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>SSAD</td><td><%= f.text_field :SSAD%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>CNSN</td><td><%= f.text_field :CNSN%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>RCNM</td><td><%= f.text_field :RCNM%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>SPLN</td><td><%= f.text_field :SPLN%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>SVDT</td><td><%= f.text_field :SVDT%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>RSNM</td><td><%= f.text_field :RSNM%></td>
+	  </tr>
+	
+	  <tr>
+	  <td>NMPG</td><td><%= f.text_field :NMPG%></td>
+	  </tr>	
+	</table>
+	<p>
+	
+	  <%= f.submit %>
+
+	<% end %>
+	<p/>
+</div>
+</div>
