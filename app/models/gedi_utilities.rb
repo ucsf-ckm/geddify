@@ -1,4 +1,4 @@
-require 'active_support/secure_random'
+#require 'active_support/secure_random'
 require 'net/ftp'
 
 class Gedi_utilities 

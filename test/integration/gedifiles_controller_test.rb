@@ -128,7 +128,7 @@ class Gedifiles_controller_Test < ActiveSupport::TestCase
   
   test "forward existing file to new ip address" do
     visit '/gedifiles'
-    click_link 'forward'
+    first(:link, 'forward').click 
     fill_in 'address', :with => APP_CONFIG['ftp_ipaddress'] 
     click_button 'Forward'
     assert page.has_content?("Sent")
@@ -136,7 +136,7 @@ class Gedifiles_controller_Test < ActiveSupport::TestCase
   
   test "forward existing file to new ip address fails with bad ip address" do
     visit '/gedifiles'
-    click_link 'forward'
+    first(:link, 'forward').click 
     fill_in 'address', :with => '123.45.67.890'
     select('Ariel3 (ftp)', :from => 'target_type')  
     click_button 'Forward'
@@ -148,7 +148,7 @@ class Gedifiles_controller_Test < ActiveSupport::TestCase
   # processing errors)
   #test "forward existing file to another geddify app" do
   #  visit '/gedifiles'
-  #  click_link 'forward'
+  #  first(:link, 'forward').click 
   #  fill_in 'address', :with => '127.0.0.1:3000'
   #  select('geddify', :from => 'target_type')  
   #  save_and_open_page
@@ -158,7 +158,7 @@ class Gedifiles_controller_Test < ActiveSupport::TestCase
   
   test "forward existing file to patron email address" do
     visit '/gedifiles'
-    click_link 'forward'
+    first(:link, 'forward').click 
     fill_in 'address', :with => APP_CONFIG['email_address'] 
     click_button 'Forward'
     assert page.has_content?("Success")
@@ -166,7 +166,7 @@ class Gedifiles_controller_Test < ActiveSupport::TestCase
   
   test "forward existing file to patron email address fails on bad email address" do
     visit '/gedifiles'
-    click_link 'forward'
+    first(:link, 'forward').click 
     fill_in 'address', :with => APP_CONFIG['email_address'] 
     click_button 'Forward'
     assert page.has_content?("Success")
@@ -204,7 +204,7 @@ class Gedifiles_controller_Test < ActiveSupport::TestCase
     FileUtils.cp 'test/fixtures/12345678.90A', 'gedifiles/12345678.90A'
     prev = Gedifile.count
     visit '/gedifiles'
-    click_link 'delete'
+    first(:link, 'delete').click 
     assert_equal prev-1, Gedifile.count
   end
   
