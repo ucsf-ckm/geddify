@@ -93,7 +93,6 @@ class GedifilesController < ApplicationController
     @gedifile = Gedifile.find(params[:id])
       
     if @gedifile.update_attributes(params[:gedifile])
-      flash[:notice] = 
       if @gedifile.update_gedi_file
         flash[:notice] = "Success: #{@gedifile.gedifilename.filename} update succeeded"
       else

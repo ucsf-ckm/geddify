@@ -127,15 +127,18 @@ class Gedi_utilities
 
   # takes a hash of gedi header/value pairs and prepends them to a file
   def self.add_gedi_headers_to_file(gedi_headers, directory, filename)
+        
     headerlength = 0
+        
     tempname = generate_gedi_file_name(APP_CONFIG['ftp_ipaddress'], '100')
     tmppath = File.join(directory, tempname)
+
 
     File.open(tmppath, "w") do |new|
         gedi_headers.each do|header, value|
                     
         unless value.nil? || header == "ZPAD"
-          headerlength += (8 + value.length)        
+          headerlength += (8 + value.length)
           new.write "#{header}#{"%04d" % value.length}#{value}"
         end
       end
@@ -193,6 +196,8 @@ class Gedi_utilities
 
     # CILN is the gedi MNEM that specifies the cover information length
     # This is the part of the file that contains all gedi information
+    
+    puts parse_gedi_headers(directory, filename)["CILN"]
     ciln = parse_gedi_headers(directory, filename)["CILN"].to_i
 
     tempfilename = Gedi_utilities.generate_gedi_file_name(APP_CONFIG['ftp_ipaddress'], '100')

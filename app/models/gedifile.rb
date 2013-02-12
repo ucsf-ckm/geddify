@@ -416,7 +416,7 @@ class Gedifile < ActiveRecord::Base
   def update_gedi_file
     begin
       Gedi_utilities.remove_gedi_headers_from_file(APP_CONFIG['gedifiles_directory'], self.gedifilename.filename)
-      Gedi_utilities.add_gedi_headers_to_file(@gedifile.get_gedi_attributes , APP_CONFIG['gedifiles_directory'],self.gedifilename.filename)
+      Gedi_utilities.add_gedi_headers_to_file(self.get_gedi_attributes , APP_CONFIG['gedifiles_directory'], self.gedifilename.filename)
       return true
     rescue Exception => exc
       Rails.logger.info exc
